@@ -18,6 +18,11 @@ func TestMatchLine(t *testing.T) {
 			pattern: `\d`,
 			ok:      true,
 		},
+		{
+			line:    []byte("alpha-num3ric"),
+			pattern: `\w`,
+			ok:      true,
+		},
 	}
 
 	for _, tt := range tests {

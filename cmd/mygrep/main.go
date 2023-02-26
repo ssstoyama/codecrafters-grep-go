@@ -48,6 +48,13 @@ func matchLine(line []byte, pattern string) (bool, error) {
 			}
 		}
 		return false, nil
+	case pattern == `\w`:
+		for _, char := range string(line) {
+			if unicode.IsLetter(char) {
+				return true, nil
+			}
+		}
+		return false, nil
 	case utf8.RuneCountInString(pattern) == 1:
 		return bytes.ContainsAny(line, pattern), nil
 	}
