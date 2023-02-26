@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"regexp"
 	"unicode/utf8"
 )
 
@@ -38,6 +39,9 @@ func main() {
 }
 
 func matchLine(line []byte, pattern string) (bool, error) {
+	if pattern == `\d` {
+		return regexp.Match("[0-9]+", line)
+	}
 	if utf8.RuneCountInString(pattern) != 1 {
 		return false, fmt.Errorf("unsupported pattern: %q", pattern)
 	}
