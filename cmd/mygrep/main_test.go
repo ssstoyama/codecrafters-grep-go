@@ -23,6 +23,16 @@ func TestMatchLine(t *testing.T) {
 			pattern: `\w`,
 			ok:      true,
 		},
+		{
+			line:    []byte("apple"),
+			pattern: `[abc]`,
+			ok:      true,
+		},
+		{
+			line:    []byte("dog"),
+			pattern: `[abc]`,
+			ok:      false,
+		},
 	}
 
 	for _, tt := range tests {

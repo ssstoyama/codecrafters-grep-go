@@ -40,7 +40,6 @@ func main() {
 
 func matchLine(line []byte, pattern string) (bool, error) {
 	switch {
-
 	case pattern == `\d`:
 		for _, char := range string(line) {
 			if unicode.IsDigit(char) {
@@ -51,6 +50,13 @@ func matchLine(line []byte, pattern string) (bool, error) {
 	case pattern == `\w`:
 		for _, char := range string(line) {
 			if unicode.IsLetter(char) {
+				return true, nil
+			}
+		}
+		return false, nil
+	case pattern[0] == '[' && pattern[len(pattern)-1] == ']':
+		for _, char := range pattern {
+			if bytes.ContainsRune(line, char) {
 				return true, nil
 			}
 		}
